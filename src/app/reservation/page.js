@@ -9,10 +9,10 @@ const timeSlots = [
 
 // Visual floor plan zones configuration
 const zoneConfig = {
-  window: { label: 'ริมหน้าต่าง', IconComponent: FiSun, color: 'from-amber-100 to-orange-100', borderColor: 'border-amber-300' },
-  center: { label: 'กลางร้าน', IconComponent: FiCoffee, color: 'from-coffee-100 to-coffee-200', borderColor: 'border-coffee-300' },
-  garden: { label: 'สวน', IconComponent: FiStar, color: 'from-green-100 to-emerald-100', borderColor: 'border-green-300' },
-  private: { label: 'ห้องส่วนตัว', IconComponent: FiLock, color: 'from-purple-100 to-indigo-100', borderColor: 'border-purple-300' },
+  window: { label: 'ริมหน้าต่าง', labelEn: 'Window', IconComponent: FiSun, color: 'from-amber-100 to-orange-100', borderColor: 'border-amber-300' },
+  center: { label: 'กลางร้าน', labelEn: 'Center', IconComponent: FiCoffee, color: 'from-coffee-100 to-coffee-200', borderColor: 'border-coffee-300' },
+  garden: { label: 'สวน', labelEn: 'Garden', IconComponent: FiStar, color: 'from-green-100 to-emerald-100', borderColor: 'border-green-300' },
+  private: { label: 'ห้องส่วนตัว', labelEn: 'Private', IconComponent: FiLock, color: 'from-purple-100 to-indigo-100', borderColor: 'border-purple-300' },
 };
 
 export default function ReservationPage() {
@@ -156,13 +156,14 @@ export default function ReservationPage() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="text-accent font-medium text-sm tracking-widest uppercase">
-            reservation
+          <span className="heading-en text-accent text-sm tracking-[0.3em] uppercase">
+            Reservation
           </span>
           <h1 className="text-3xl md:text-4xl font-bold text-coffee-800 mt-3">
             จองโต๊ะ
           </h1>
-          <div className="w-16 h-1 bg-accent mx-auto mt-4 rounded-full" />
+          <p className="font-serif-en text-coffee-400 text-sm mt-2">Select your preferred date, time and table</p>
+          <div className="divider-accent mx-auto mt-4" />
         </div>
 
         {/* Steps indicator */}

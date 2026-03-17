@@ -8,7 +8,7 @@ const carouselSlides = [
     titleEn: 'Crafted with Love',
     titleTh: 'ใส่ใจทุกแก้ว',
     subtitle: 'From handpicked beans to your perfect cup',
-    image: 'https://images.unsplash.com/photo-1447933601403-56dc2df3e4f1?w=1600&h=900&fit=crop',
+    image: 'https://perfectdailygrind.com/wp-content/uploads/2019/02/coffee-bar-1.jpg',
   },
   {
     titleEn: 'A Moment of Bliss',
@@ -72,11 +72,10 @@ export default function Home() {
         {carouselSlides.map((slide, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-all duration-[1500ms] ease-in-out ${
-              index === currentSlide
+            className={`absolute inset-0 transition-all duration-[1500ms] ease-in-out ${index === currentSlide
                 ? 'opacity-100 scale-100'
                 : 'opacity-0 scale-110'
-            }`}
+              }`}
           >
             {/* Background Image */}
             <img
@@ -137,11 +136,10 @@ export default function Home() {
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`transition-all duration-500 rounded-full ${
-                index === currentSlide
+              className={`transition-all duration-500 rounded-full ${index === currentSlide
                   ? 'w-10 h-2.5 bg-accent'
                   : 'w-2.5 h-2.5 bg-white/40 hover:bg-white/70'
-              }`}
+                }`}
               aria-label={`Slide ${index + 1}`}
             />
           ))}

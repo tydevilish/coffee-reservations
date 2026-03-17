@@ -36,13 +36,14 @@ export default function ReservationStatusPage() {
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="text-accent font-medium text-sm tracking-widest uppercase">
-            status
+          <span className="heading-en text-accent text-sm tracking-[0.3em] uppercase">
+            Check Status
           </span>
           <h1 className="text-3xl md:text-4xl font-bold text-coffee-800 mt-3">
             เช็คสถานะการจอง
           </h1>
-          <div className="w-16 h-1 bg-accent mx-auto mt-4 rounded-full" />
+          <p className="font-serif-en text-coffee-400 text-sm mt-2">Enter your phone number to track your reservation</p>
+          <div className="divider-accent mx-auto mt-4" />
         </div>
 
         {/* Search Form */}

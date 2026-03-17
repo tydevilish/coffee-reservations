@@ -23,11 +23,10 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
           ? 'glass shadow-lg shadow-coffee-900/5 py-3'
-          : 'bg-transparent py-5'
-      }`}
+          : 'bg-white/50 backdrop-blur-md py-5'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
@@ -36,10 +35,10 @@ export default function Navbar() {
             <FiCoffee className="text-white text-lg" />
           </div>
           <div className="flex flex-col">
-            <span className={`text-lg font-bold tracking-tight leading-none ${scrolled ? 'text-coffee-800' : 'text-white'}`}>
+            <span className="text-lg font-bold tracking-tight leading-none text-coffee-800">
               Bean<span className="text-accent">Bliss</span>
             </span>
-            <span className={`heading-en text-[9px] tracking-[0.2em] uppercase leading-none mt-0.5 ${scrolled ? 'text-coffee-400' : 'text-white/50'}`}>
+            <span className="heading-en text-[9px] tracking-[0.2em] uppercase leading-none mt-0.5 text-coffee-400">
               coffee house
             </span>
           </div>
@@ -51,22 +50,20 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className={`heading-en text-sm tracking-wider uppercase font-normal transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-accent after:transition-all after:duration-300 hover:after:w-full ${
-                scrolled ? 'text-coffee-500 hover:text-accent' : 'text-white/70 hover:text-white'
-              }`}
+              className="heading-en text-sm tracking-wider uppercase font-normal transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-accent after:transition-all after:duration-300 hover:after:w-full text-coffee-500 hover:text-accent"
             >
               {link.label}
             </Link>
           ))}
           <Link href="/reservation" className="btn-primary text-sm py-2.5 px-6">
-            จองเลย
+            Let's book
           </Link>
         </div>
 
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`md:hidden p-2 ${scrolled ? 'text-coffee-700' : 'text-white'}`}
+          className="md:hidden p-2 text-coffee-700"
           aria-label="Toggle menu"
         >
           {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -75,9 +72,8 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden transition-all duration-300 overflow-hidden ${
-          isOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
-        }`}
+        className={`md:hidden transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
+          }`}
       >
         <div className="glass mx-4 mt-2 rounded-2xl p-4 space-y-2">
           {navLinks.map((link) => (

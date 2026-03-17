@@ -76,11 +76,10 @@ export default function MenuPage() {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2 ${
-                  activeCategory === cat
-                    ? 'bg-accent text-white shadow-lg shadow-accent/30 scale-105'
-                    : 'bg-white text-coffee-600 border border-coffee-200 hover:border-accent/40 hover:text-accent shadow-sm'
-                }`}
+                className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2 ${activeCategory === cat
+                  ? 'bg-accent text-white shadow-lg shadow-accent/30 scale-105'
+                  : 'bg-white text-coffee-600 border border-coffee-200 hover:border-accent/40 hover:text-accent shadow-sm'
+                  }`}
               >
                 {cat === 'all' ? (
                   <>

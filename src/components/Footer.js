@@ -102,7 +102,7 @@ export default function Footer() {
             className="flex items-center gap-2 text-coffee-600 hover:text-coffee-400 text-xs transition-colors heading-en tracking-wider"
           >
             <FiSettings className="text-[10px]" />
-            <span>Admin</span>
+            <span>สำหรับผู้ดูแลระบบ</span>
           </Link>
         </div>
       </div>

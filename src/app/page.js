@@ -1,26 +1,29 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { FiArrowRight, FiStar, FiUsers, FiCoffee, FiHeart, FiClock, FiMapPin } from 'react-icons/fi';
+import { FiArrowRight, FiArrowLeft, FiStar, FiUsers, FiCoffee, FiHeart, FiClock, FiMapPin, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const carouselSlides = [
   {
-    titleEn: 'Crafted with Love',
-    titleTh: 'ใส่ใจทุกแก้ว',
-    subtitle: 'From handpicked beans to your perfect cup',
-    image: 'https://perfectdailygrind.com/wp-content/uploads/2019/02/coffee-bar-1.jpg',
+    tag: 'Specialty Coffee & Bakery',
+    titleEn: 'Morning\nRitual',
+    desc: 'เริ่มต้นวันใหม่กับกาแฟอาราบิก้าแท้ คัดสรรจากไร่บนดอย คั่วสดใหม่ทุกวัน พร้อมเสิร์ฟด้วยความใส่ใจ',
+    cta: { label: 'View Menu →', href: '/menu' },
+    image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1000&h=1200&fit=crop',
   },
   {
-    titleEn: 'A Moment of Bliss',
-    titleTh: 'ช่วงเวลาแห่งความสุข',
-    subtitle: 'Relax in our minimalist atmosphere',
-    image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1600&h=900&fit=crop',
+    tag: 'Book Your Table',
+    titleEn: 'Reserve\nYour Spot',
+    desc: 'จองโต๊ะล่วงหน้าง่ายๆ ผ่านระบบออนไลน์ เลือกโซนที่ชอบ มั่นใจว่ามีที่นั่งรอคุณเสมอ',
+    cta: { label: 'Reserve Now →', href: '/reservation' },
+    image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1000&h=1200&fit=crop',
   },
   {
-    titleEn: 'Reserve Your Spot',
-    titleTh: 'จองโต๊ะล่วงหน้า',
-    subtitle: 'Secure your favorite seat online',
-    image: 'https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=1600&h=900&fit=crop',
+    tag: 'Handcrafted With Love',
+    titleEn: 'A Moment\nof Bliss',
+    desc: 'ผ่อนคลายในบรรยากาศมินิมอล ดื่มด่ำกาแฟที่ชงอย่างพิถีพิถัน ประสบการณ์ที่คุณจะหลงรัก',
+    cta: { label: 'View Menu →', href: '/menu' },
+    image: 'https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=1000&h=1200&fit=crop',
   },
 ];
 
@@ -61,96 +64,145 @@ export default function Home() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
-    }, 6000);
+    }, 7000);
     return () => clearInterval(timer);
   }, []);
 
+  function nextSlide() {
+    setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
+  }
+
+  function prevSlide() {
+    setCurrentSlide((prev) => (prev - 1 + carouselSlides.length) % carouselSlides.length);
+  }
+
+  const slide = carouselSlides[currentSlide];
+
   return (
     <>
-      {/* ===== Hero Carousel ===== */}
-      <section className="relative h-screen overflow-hidden">
-        {carouselSlides.map((slide, index) => (
+      {/* ===== Hero — Split Layout ===== */}
+      <section className="relative min-h-screen lg:h-screen flex flex-col lg:flex-row">
+        {/* Left Side — Text Content */}
+        <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-20 xl:px-28 pt-28 pb-12 lg:pt-24 lg:pb-20 bg-background relative z-10">
+          {/* Tag */}
           <div
-            key={index}
-            className={`absolute inset-0 transition-all duration-[1500ms] ease-in-out ${index === currentSlide
-                ? 'opacity-100 scale-100'
-                : 'opacity-0 scale-110'
-              }`}
+            key={`tag-${currentSlide}`}
+            className="animate-fade-in-up"
           >
-            {/* Background Image */}
-            <img
-              src={slide.image}
-              alt={slide.titleEn}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            {/* Dark overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-coffee-900/60 via-coffee-900/40 to-coffee-900/80" />
+            <span className="inline-block heading-en text-[11px] tracking-[0.25em] uppercase text-white bg-coffee-800 px-4 py-2 rounded-full mb-8">
+              {slide.tag}
+            </span>
           </div>
-        ))}
 
-        <div className="relative z-10 h-full flex items-center justify-center text-center px-6">
-          <div className="max-w-4xl">
-            {/* English title - Georgia */}
-            <p
-              key={`en-${currentSlide}`}
-              className="heading-en text-accent text-lg md:text-2xl mb-3 animate-fade-in-up tracking-widest"
-            >
-              {carouselSlides[currentSlide].titleEn}
-            </p>
+          {/* Title — Large serif */}
+          <h1
+            key={`title-${currentSlide}`}
+            className="heading-en text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-coffee-900 leading-[0.95] mb-8 animate-fade-in-up"
+            style={{ animationDelay: '0.1s' }}
+          >
+            {slide.titleEn.split('\n').map((line, i) => (
+              <span key={i}>
+                {line}
+                {i === 0 && <br />}
+              </span>
+            ))}
+          </h1>
 
-            {/* Thai title */}
-            <h1
-              key={`title-${currentSlide}`}
-              className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-5 animate-fade-in-up"
-              style={{ animationDelay: '0.15s' }}
-            >
-              {carouselSlides[currentSlide].titleTh}
-            </h1>
+          {/* Description */}
+          <p
+            key={`desc-${currentSlide}`}
+            className="text-coffee-500 text-sm md:text-base leading-relaxed max-w-md mb-10 animate-fade-in-up"
+            style={{ animationDelay: '0.2s' }}
+          >
+            {slide.desc}
+          </p>
 
-            {/* Subtitle - English, serif */}
-            <p
-              key={`sub-${currentSlide}`}
-              className="font-serif-en text-coffee-200 text-base md:text-xl mb-10 animate-fade-in-up"
-              style={{ animationDelay: '0.3s' }}
+          {/* CTA Button */}
+          <div
+            key={`cta-${currentSlide}`}
+            className="animate-fade-in-up"
+            style={{ animationDelay: '0.3s' }}
+          >
+            <Link
+              href={slide.cta.href}
+              className="inline-flex items-center gap-2 bg-coffee-900 text-white heading-en text-sm tracking-wider px-8 py-4 rounded-full hover:bg-coffee-800 transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
             >
-              {carouselSlides[currentSlide].subtitle}
-            </p>
+              {slide.cta.label}
+            </Link>
+          </div>
 
-            <div
-              className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up"
-              style={{ animationDelay: '0.45s' }}
-            >
-              <Link href="/reservation" className="btn-primary text-lg px-8 py-4">
-                จองโต๊ะเลย <FiArrowRight />
-              </Link>
-              <Link href="/menu" className="btn-secondary text-lg px-8 py-4 text-white border-white/30 hover:bg-white/10">
-                ดูเมนู
-              </Link>
+          {/* Bottom controls — only on desktop */}
+          <div className="hidden lg:flex absolute bottom-10 left-8 md:left-16 lg:left-20 xl:left-28 items-center gap-6">
+            {/* Dots */}
+            <div className="flex items-center gap-2">
+              {carouselSlides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`transition-all duration-500 rounded-full ${index === currentSlide
+                      ? 'w-8 h-2 bg-coffee-800'
+                      : 'w-2 h-2 bg-coffee-300 hover:bg-coffee-400'
+                    }`}
+                  aria-label={`Slide ${index + 1}`}
+                />
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Carousel dots */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex gap-3">
-          {carouselSlides.map((_, index) => (
-            <button
+        {/* Right Side — Image (desktop: side, mobile: below text) */}
+        <div className="w-full lg:w-1/2 h-[50vh] lg:h-full relative overflow-hidden">
+          {carouselSlides.map((s, index) => (
+            <div
               key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`transition-all duration-500 rounded-full ${index === currentSlide
-                  ? 'w-10 h-2.5 bg-accent'
-                  : 'w-2.5 h-2.5 bg-white/40 hover:bg-white/70'
+              className={`absolute inset-0 transition-all duration-[1200ms] ease-in-out ${index === currentSlide
+                  ? 'opacity-100 scale-100'
+                  : 'opacity-0 scale-105'
                 }`}
-              aria-label={`Slide ${index + 1}`}
-            />
+            >
+              <img
+                src={s.image}
+                alt={s.titleEn}
+                className="w-full h-full object-cover"
+              />
+            </div>
           ))}
-        </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 right-8 z-10 text-white/30 text-xs hidden md:flex items-center gap-3">
-          <div className="w-px h-10 bg-white/20" />
-          <span className="heading-en tracking-widest" style={{ writingMode: 'vertical-rl' }}>
-            scroll
-          </span>
+          {/* Navigation Arrows */}
+          <div className="absolute bottom-6 right-6 lg:bottom-10 lg:right-10 z-10 flex items-center gap-3">
+            <button
+              onClick={prevSlide}
+              className="w-10 h-10 lg:w-12 lg:h-12 rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-white/20 transition-all bg-black/20 backdrop-blur-sm"
+              aria-label="Previous slide"
+            >
+              <FiChevronLeft size={18} />
+            </button>
+            <button
+              onClick={nextSlide}
+              className="w-10 h-10 lg:w-12 lg:h-12 rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-white/20 transition-all bg-black/20 backdrop-blur-sm"
+              aria-label="Next slide"
+            >
+              <FiChevronRight size={18} />
+            </button>
+          </div>
+
+          {/* Mobile dots overlay */}
+          <div className="lg:hidden absolute bottom-6 left-6 z-10 flex items-center gap-2">
+            {carouselSlides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`transition-all duration-500 rounded-full ${index === currentSlide
+                    ? 'w-7 h-1.5 bg-white'
+                    : 'w-1.5 h-1.5 bg-white/40'
+                  }`}
+                aria-label={`Slide ${index + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Subtle overlay */}
+          <div className="absolute inset-0 bg-gradient-to-l from-transparent to-background/5 pointer-events-none hidden lg:block" />
         </div>
       </section>
 
@@ -194,7 +246,6 @@ export default function Home() {
               <div
                 key={index}
                 className="card group text-center p-8"
-                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div
                   className={`w-16 h-16 mx-auto mb-5 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white text-2xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}
@@ -335,7 +386,7 @@ export default function Home() {
             <Link href="/reservation" className="btn-primary text-lg px-10 py-4">
               จองโต๊ะเลย <FiArrowRight />
             </Link>
-            <Link href="/reservation/status" className="btn-secondary text-white border-white/30 hover:bg-white/10 text-lg px-10 py-4">
+            <Link href="/reservation/status" className="bg-coffee-400 rounded-full transition duration-500 text-white border-white/30 hover:bg-coffee-500 text-lg px-10 py-4 hover:scale-105 hover:shadow-sm">
               เช็คสถานะจอง
             </Link>
           </div>

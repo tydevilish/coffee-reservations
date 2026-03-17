@@ -1,26 +1,437 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --coffee-900: #1a0e0a;
+  --coffee-800: #2C1A0E;
+  --coffee-700: #3D2517;
+  --coffee-600: #6F4E37;
+  --coffee-500: #8B6F4E;
+  --coffee-400: #A68B6B;
+  --coffee-300: #D4A574;
+  --coffee-200: #E8CBB0;
+  --coffee-100: #F5E6D3;
+  --coffee-50: #FFF8F0;
+  --cream: #FFFAF5;
+  --accent: #C97D4F;
+  --accent-dark: #A4623A;
+  --success: #4A7C59;
+  --warning: #C98B2D;
+  --danger: #A94442;
+  --background: #FFF8F0;
+  --foreground: #2C1A0E;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-coffee-900: var(--coffee-900);
+  --color-coffee-800: var(--coffee-800);
+  --color-coffee-700: var(--coffee-700);
+  --color-coffee-600: var(--coffee-600);
+  --color-coffee-500: var(--coffee-500);
+  --color-coffee-400: var(--coffee-400);
+  --color-coffee-300: var(--coffee-300);
+  --color-coffee-200: var(--coffee-200);
+  --color-coffee-100: var(--coffee-100);
+  --color-coffee-50: var(--coffee-50);
+  --color-cream: var(--cream);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-prompt);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-prompt), sans-serif;
+}
+
+/* ===== Premium Typography ===== */
+.font-serif-en {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+.heading-en {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  letter-spacing: 0.03em;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--coffee-300);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--coffee-400);
+}
+
+/* ===== Animations ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(201, 125, 79, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(201, 125, 79, 0.6); }
+}
+
+@keyframes steam {
+  0% { 
+    opacity: 0; 
+    transform: translateY(0) scaleX(1); 
+  }
+  15% { opacity: 1; }
+  50% { 
+    opacity: 0.6; 
+    transform: translateY(-20px) scaleX(1.2); 
+  }
+  100% { 
+    opacity: 0; 
+    transform: translateY(-40px) scaleX(0.8); 
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.8s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.8s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-steam {
+  animation: steam 2s ease-out infinite;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* ===== Staggered animations ===== */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+
+/* ===== Glass Effect ===== */
+.glass {
+  background: rgba(255, 248, 240, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 165, 116, 0.2);
+}
+
+.glass-dark {
+  background: rgba(44, 26, 14, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 165, 116, 0.15);
+}
+
+/* ===== Coffee Bean Pattern ===== */
+.coffee-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4A574' fill-opacity='0.06'%3E%3Cpath d='M30 15c-4.5 0-8 3.5-8 8s1.5 9 8 9 8-5.5 8-9-3.5-8-8-8zm0 2c1 0 1.5 2 1.5 6s-.5 6-1.5 6-1.5-2-1.5-6 .5-6 1.5-6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ===== Divider ===== */
+.divider-accent {
+  width: 3rem;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+  border-radius: 2px;
+}
+
+/* ===== Premium Image Overlay ===== */
+.img-overlay {
+  position: relative;
+  overflow: hidden;
+}
+.img-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(26, 14, 10, 0.4));
+  pointer-events: none;
+}
+
+/* ===== Button Styles ===== */
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(201, 125, 79, 0.35);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--coffee-700);
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 2px solid var(--coffee-300);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-secondary:hover {
+  background: var(--coffee-100);
+  border-color: var(--coffee-400);
+  transform: translateY(-2px);
+}
+
+/* ===== Card Styles ===== */
+.card {
+  background: white;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(212, 165, 116, 0.12);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 1px 3px rgba(44, 26, 14, 0.04);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(44, 26, 14, 0.08);
+  border-color: rgba(212, 165, 116, 0.25);
+}
+
+/* ===== Table Visual ===== */
+.table-seat {
+  transition: all 0.3s ease;
+}
+
+.table-seat.available {
+  cursor: pointer;
+}
+
+.table-seat.available:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+.table-seat.selected {
+  animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+.table-seat.occupied {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ===== Input Styles ===== */
+.input-field {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--coffee-200);
+  border-radius: 0.75rem;
+  background: white;
+  color: var(--foreground);
+  font-family: var(--font-prompt), sans-serif;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.input-field:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(201, 125, 79, 0.15);
+}
+
+.input-field::placeholder {
+  color: var(--coffee-300);
+}
+
+/* ===== Badge ===== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge-success {
+  background: rgba(74, 124, 89, 0.1);
+  color: var(--success);
+}
+
+.badge-warning {
+  background: rgba(201, 139, 45, 0.1);
+  color: var(--warning);
+}
+
+.badge-danger {
+  background: rgba(169, 68, 66, 0.1);
+  color: var(--danger);
+}
+
+/* ===== Parallax-like image section ===== */
+.parallax-section {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+@media (max-width: 768px) {
+  .parallax-section {
+    background-attachment: scroll;
+  }
+}
+
+/* ===== Text gradient ===== */
+.text-gradient {
+  background: linear-gradient(135deg, var(--accent), var(--coffee-300));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== Line decoration ===== */
+.line-deco {
+  position: relative;
+}
+.line-deco::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
 }
